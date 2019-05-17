@@ -18,11 +18,11 @@ index 2c8777e138..cc28c32756 100644
 +{
 +    ucontext_t *ctx = sigcontext;
 +
-+    WINE_ERR( "SIGSYS (%d)\n", ctx->uc_mcontext.gregs[REG_EAX] );
++    WINE_ERR( "SIGSYS (%d)\n", ctx->uc_mcontext.gregs[REG_RAX] );
 +
 +    // FIXME Relay to actual Nt syscall.
 +
-+    ctx->uc_mcontext.gregs[REG_EAX] = 0;
++    ctx->uc_mcontext.gregs[REG_RAX] = 0;
 +}
 +
 +// FIXME All of this code is i386 Linux-specific. It may want to live in
