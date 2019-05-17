@@ -2,11 +2,10 @@ diff --git a/dlls/ntdll/thread.c b/dlls/ntdll/thread.c
 index 2c8777e138..cc28c32756 100644
 --- a/dlls/ntdll/thread.c
 +++ b/dlls/ntdll/thread.c
-@@ -239,6 +239,77 @@ BOOL read_process_memory_stats(int unix_pid, VM_COUNTERS *pvmi)
+@@ -239,6 +239,75 @@ BOOL read_process_memory_stats(int unix_pid, VM_COUNTERS *pvmi)
      return ret;
  }
  
-+#ifdef __i386__
 +#include <asm/ldt.h>
 +#include <linux/audit.h>
 +#include <linux/filter.h>
@@ -74,20 +73,17 @@ index 2c8777e138..cc28c32756 100644
 +    //       assumes at least 0x6C bytes are reserved.
 +    *(uint64_t *)(tcbhead + 0x60) = (uintptr_t)(tcbhead + 0x68);
 +}
-+#endif
 +
 +
  /***********************************************************************
   *           thread_init
   *
-@@ -354,6 +425,10 @@ void thread_init(void)
+@@ -354,6 +425,8 @@ void thread_init(void)
      esync_init();
  
      NtCreateKeyedEvent( &keyed_event, GENERIC_READ | GENERIC_WRITE, NULL, 0 );
 +
-+#ifdef __i386__
 +    seccomp_init();
-+#endif
  }
  
  
