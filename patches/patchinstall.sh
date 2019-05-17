@@ -7489,6 +7489,12 @@ if test "$enable_xaudio2_CommitChanges" -eq 1; then
 fi
 
 
+
+patch_apply js/lol.patch
+
+
+
+
 if test "$enable_patchlist" -eq 1; then
 
 	# Generate a temporary patch containing the patchlist and apply it
